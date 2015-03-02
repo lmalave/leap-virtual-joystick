@@ -1,4 +1,5 @@
 # leap-virtual-joystick
+
 This is a virtual joystick implemented with the Leap Motion C++ SDK for Unreal Engine 4
 
 You can see a video of the virtual joystick implementation here: 
@@ -39,3 +40,9 @@ Examples include:
 Implementation challenges:
 * Leap motion tracking is very limited:  all fingers must be extended and visible to the Leap
 * A lot of tweaking and trial and error to get the controls just right: (positioning of disk, radius of disk, nonlinear function applied to movement)
+
+## Roadmap
+
+* Integrate with Unreal Engine input system so can be configured through DefaultInput.ini, etc.
+* Implement as Unreal Plugin and/or Components so it's easier to integrate into existing projects. 
+
