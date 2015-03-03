@@ -47,7 +47,7 @@ public:
      As the method name implies, this method calculates the location coordinates in world space of the Leap hand and finger coordinates.  Note that for now this assumes a scaling factor of 0.1, since Leap coordinates are always in millimeters and the default Unreal world scale is 1 Unreal Unit = 1 centimeter.  
      Note that the intention is that this method should be called first, and then the values retrieved through the available Getter methods. 
      */
-    void CalculateUnrealHandLocationsFromLeapCoordinates();
+    void UpdateHandLocations();
     
     FVector GetLeftPalmLocation_WorldSpace();
     FVector GetLeftFingerLocation_WorldSpace();

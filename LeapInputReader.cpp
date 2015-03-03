@@ -78,7 +78,7 @@ FVector LeapInputReader::GetRightFingerLocation_CharacterSpace() {
     return RightFingerLocation_CharacterSpace;
 }
 
-void LeapInputReader::CalculateUnrealHandLocationsFromLeapCoordinates()
+void LeapInputReader::UpdateHandLocations()
 {
     // First just get hand and finger positions and draw the hands
     Leap::Frame Frame = Controller->frame();
