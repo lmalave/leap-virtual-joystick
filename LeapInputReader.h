@@ -32,7 +32,7 @@ or implied, of Leonardo Malave.
 /**
  * 
  */
-class OCULUSUIPOC_API LeapInputReader
+class LeapInputReader
 {
 public:
     /* 
@@ -57,6 +57,8 @@ public:
     FVector GetLeftFingerLocation_CharacterSpace();
     FVector GetRightPalmLocation_CharacterSpace();
     FVector GetRightFingerLocation_CharacterSpace();
+    bool IsValidInputLastFrame();
+    
     
     /*
      If true - draws minimalist hands just connecting the palm location to the fingertips
@@ -80,6 +82,7 @@ public:
      */
     FVector LeapHandOffset;
     
+    
 protected:
 
     /*
@@ -90,6 +93,7 @@ protected:
     ACharacter* Character;
     Leap::Controller* Controller;
 
+    bool ValidInputLastFrame;
     FVector LeftPalmLocation_WorldSpace;
     FVector LeftFingerLocation_WorldSpace;
     FVector RightPalmLocation_WorldSpace;

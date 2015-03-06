@@ -26,7 +26,7 @@ authors and should not be interpreted as representing official policies, either 
 or implied, of Leonardo Malave.
 ********************************/
 
-#include "OculusUIPOC.h"
+#include "OculusARPOC.h"
 #include "Engine.h"
 #include "IHeadMountedDisplay.h"
 #include "LeapInputReader.h"
@@ -40,11 +40,17 @@ LeapInputReader::LeapInputReader(Leap::Controller* Controller, ACharacter* Chara
     // NOTE: Mount offset is still in Leap coordinates, not Unreal units!!
     LeapMountOffset = FVector(150.f, 0.f, -20.f);
     LeapHandOffset = FVector(10.0, 0.0, 45.0); // note: x=forward, y=right, z=up
+    ValidInputLastFrame = false;
 }
 
 LeapInputReader::~LeapInputReader()
 {
 }
+
+bool LeapInputReader::IsValidInputLastFrame() {
+    return ValidInputLastFrame;
+}
+
 
 FVector LeapInputReader::GetLeftPalmLocation_WorldSpace() {
     return LeftPalmLocation_WorldSpace;
@@ -89,8 +95,10 @@ void LeapInputReader::UpdateHandLocations()
     FColor fingertipColor = handColor;
     
     UWorld* World = Character->GetWorld();
-    
+   
+    ValidInputLastFrame = false;
     for (Leap::HandList::const_iterator HandsIter = Hands.begin(); HandsIter != Hands.end(); HandsIter++) {
+        ValidInputLastFrame = true; // for now valid if hands detected.  in future, will check if movement is "natural"
         Leap::Hand Hand = (Leap::Hand)(*HandsIter);
         Leap::Vector palmPosition = Hand.palmPosition();
         FVector palmLocation = LeapPositionToUnrealLocation(palmPosition, LeapHandOffset);
